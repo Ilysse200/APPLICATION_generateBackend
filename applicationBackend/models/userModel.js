@@ -14,7 +14,11 @@ const userSchema = new Schema({
         type: String,
         enum: ["Admin", "User"],
         required: true
+    },
+    tokens: { 
+        accessToken: { type: String }
     }
 })
 
 const user = model('user',userSchema);
+export default user;
