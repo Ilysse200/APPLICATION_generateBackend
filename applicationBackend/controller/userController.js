@@ -33,3 +33,42 @@ export const Register = async(req,res)=>{
         res.status(500).json({error: error.message});
     }
 }
+export const Login = async (req, res) => {
+    try {
+      const { name, password } = req.body;
+      const user = await User2.findOne({ name });
+  
+      if (!user) {
+        // User not found
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: "Invalid credentials" });
+      }
+      const accessToken = generateAccessToken(user);
+  
+  
+      user.tokens.accessToken = accessToken;
+  
+      await user.save();
+      res.json({
+        message: "Login successful!",
+        user: {
+          _id: user._id,
+          userName: user.name,
+          userRole: user.userRole,
+          token: {
+            accessToken: user.tokens.accessToken,
+          },
+        },
+      });
+   
+    
+    } catch (error) {
+      // General error handling
+      res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+
