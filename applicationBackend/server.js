@@ -5,6 +5,7 @@ import dotenv from "dotenv"
 import bodyParser from 'body-parser';
 import formRouter from './routers/forrmRoutes.js';
 import applicationsRoute from './routers/applicationsRoute.js'
+import userRouter from './routers/userRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 app.use('/forms', formRouter)
 app.use('/applications',applicationsRoute)
+app.use('/users', userRouter)
 
 //variables that hold vvalues inside the .env file
 const db_user = process.env.DB_USER;
