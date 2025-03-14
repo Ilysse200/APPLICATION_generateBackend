@@ -28,6 +28,20 @@ export const displayFoms = async(req, res)=>{
         res.status(500).json({success:false, message:'Fetch failed', error:error.message})
     }
 }
+
+//Get all available departments
+
+export const getDepartments = async (req, res) => {
+    try {
+        // ✅ Return predefined department names (No need to query the database)
+        const departments = ["IT Department", "Finance Department", "Business Department", "Sales Department"];
+
+        res.status(200).json({ success: true, data: departments });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server error", error: error.message });
+    }
+};
+
 export const getFormsById=async(req, res)=>{
 
     const {id} = req.params;
