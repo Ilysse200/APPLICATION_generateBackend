@@ -28,6 +28,35 @@ export const displayFoms = async(req, res)=>{
         res.status(500).json({success:false, message:'Fetch failed', error:error.message})
     }
 }
+//Fetch departments with their respective jobPositions
+
+export const getJobPositions = async (req, res) => {
+    try {
+        // Fetching all the form data from the database
+        const forms = await Form.find();
+        const departmentMap = {};
+
+        forms.forEach((form) => {
+            const { department, jobPosition } = form;
+          
+            if (!departmentMap[department]) {
+              departmentMap[department] = new Set();
+            }
+          
+            departmentMap[department].add(jobPosition);
+          });
+          // Convert Sets to arrays
+        const result = Object.entries(departmentMap).map(([department, positionsSet]) => ({
+        department,
+        jobPositions: Array.from(positionsSet),
+      }));
+          
+
+        res.status(200).json({ success: true, data: result });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server error", error: error.message });
+    }
+};
 
 //Get all available departments
 
