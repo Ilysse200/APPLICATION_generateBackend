@@ -54,6 +54,7 @@ export const Login = async (req, res) => {
   
       await user.save();
       res.json({
+        success: true,
         message: "Login successful!",
         user: {
           _id: user._id,
