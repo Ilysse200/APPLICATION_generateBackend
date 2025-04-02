@@ -11,6 +11,7 @@ import userRouter from './routers/userRoutes.js';
 import deptRouter from './routers/departmentRoutes.js';
 import jobRouter from './routers/jobsRoutes.js';
 import formBuilderRouter from './routers/formBuilderRoutes.js';
+import eventRouter from './routers/eventRoutes.js';
 dotenv.config();
 const app = express();
 const db_user = process.env.DB_USER;
@@ -36,6 +37,7 @@ app.use('/departments',deptRouter)
 app.use('/jobs',jobRouter)
 app.use('/formBuild',formBuilderRouter)
 app.use('/submissions', submissionRouter)
+app.use('/eventsVacancy', eventRouter)
 
 //variables that hold vvalues inside the .env file
 
