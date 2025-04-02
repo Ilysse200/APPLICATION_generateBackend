@@ -9,19 +9,14 @@ const departmentSchema = new Schema({
     unique: true,
     trim: true
   },
-  head: {
+  vacancyType:{
     type: String,
+    enum:["Jobs","Trainings","Events"],
     required: true
   },
-  employees: {
-    type: Number,
-    default: 0,
-    min: 0
-  }, 
-  vacancyCategory:{
-    type: String,
-    required: false
-
+  purpose:{
+    type:String,
+    required: true
   },
   createdAt: {
     type: Date,
