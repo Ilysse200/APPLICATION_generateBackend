@@ -1,5 +1,5 @@
 import express from 'express';
-import { submitForm, getAllSubmissions, getSubmissionById, deleteSubmission } from '../controller/FormSubmissionController.js';
+import {submitForm, getAllSubmissions, getSubmissionById, deleteSubmission } from '../controller/FormSubmissionController.js';
 import upload from '../middleware/multer.js'; // if using multer
 
 const submissionRouter = express.Router();
