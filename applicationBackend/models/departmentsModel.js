@@ -17,6 +17,11 @@ const departmentSchema = new Schema({
     type: Number,
     default: 0,
     min: 0
+  }, 
+  vacancyCategory:{
+    type: String,
+    required: false
+
   },
   createdAt: {
     type: Date,
