@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv"
 import cors from "cors";
+import submissionRouter from './routers/formSubmissionRoute.js';
 // const express = require('express');
 import bodyParser from 'body-parser';
 import formRouter from './routers/forrmRoutes.js';
@@ -34,6 +35,7 @@ app.use('/users', userRouter)
 app.use('/departments',deptRouter)
 app.use('/jobs',jobRouter)
 app.use('/formBuild',formBuilderRouter)
+app.use('/submissions', submissionRouter)
 
 //variables that hold vvalues inside the .env file
 
