@@ -10,6 +10,15 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    gender:{
+        type:String,
+        enum:['Male', 'Female','Other'],
+        required:true
+    },
+    date:{
+        type:Date,
+        required:true,
+    },
     userRole:{
         type: String,
         enum: ["Admin", "User"],
