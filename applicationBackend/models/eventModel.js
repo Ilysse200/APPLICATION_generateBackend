@@ -23,7 +23,12 @@ const eventSchema = new Schema({
     eventRequirements:{
         type: String,
         required: true
-    }
+    },
+    departmentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Department',
+        required: true,
+      },
 })
 
 const events = model('events',eventSchema);
