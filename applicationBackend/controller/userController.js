@@ -4,7 +4,7 @@ import {generateAccessToken} from "../utils/tokenGenerate.js"
 export const Register = async(req,res)=>{
 
     try{
-        const { name, password, userRole } = req.body;
+        const { name, password, userRole, gender, date } = req.body;
 
     //Check if the userName exists
 
@@ -15,7 +15,7 @@ export const Register = async(req,res)=>{
     }
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10); //10 is the salt rounds
-    const user = new User2({ name, password: hashedPassword,userRole })
+    const user = new User2({ name, password: hashedPassword,userRole, gender, date })
     user.tokens.accessToken = generateAccessToken(user);
 
     await user.save();
@@ -60,6 +60,8 @@ export const Login = async (req, res) => {
           _id: user._id,
           userName: user.name,
           userRole: user.userRole,
+          userGender:user.gender,
+          dateBirth: user.date,
           token: {
             accessToken: user.tokens.accessToken,
           },
