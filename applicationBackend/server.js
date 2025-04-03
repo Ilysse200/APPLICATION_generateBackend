@@ -40,7 +40,7 @@ app.use('/jobs',jobRouter)
 app.use('/formBuild',formBuilderRouter)
 app.use('/submissions', submissionRouter)
 app.use('/eventsVacancy', eventRouter)
-app.use('/programs', trainings)
+app.use('/programs', trainingRouter)
 
 //variables that hold vvalues inside the .env file
 
