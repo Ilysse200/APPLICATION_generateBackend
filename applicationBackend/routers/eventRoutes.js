@@ -14,7 +14,6 @@ eventRouter.post('/eventCreate', createEvent);
 eventRouter.get('/fetchEvent', displayEvents);
 eventRouter.put('/updateEvent/:id',updateEventById);
 eventRouter.delete('/deleteEvent/:id',deleteEvent);
-eventRouter.get('/conditionalDisplay',getEventsById)
-
+eventRouter.get('/conditionalDisplay/:id',getEventsById)
 
 export default eventRouter;
