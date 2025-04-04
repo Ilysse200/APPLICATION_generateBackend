@@ -11,11 +11,11 @@ export const createTraining = async (req, res) => {
       trainingDuration,
       trainingMode,
       trainingRequirements,
-      departmentId
+      department
     } = req.body;
 
-    const department = await Department.findById(departmentId);
-    if (!department) {
+    const departmentId = await Department.findById(department);
+    if (!departmentId) {
       return res.status(404).json({ success: false, message: "Department not found" });
     }
 
@@ -25,7 +25,7 @@ export const createTraining = async (req, res) => {
       trainingDuration,
       trainingMode,
       trainingRequirements,
-      departmentId: department._id
+      department: departmentId._id
     });
 
     await newTraining.save();
@@ -38,7 +38,7 @@ export const createTraining = async (req, res) => {
 // GET all trainings
 export const getAllTrainings = async (req, res) => {
   try {
-    const trainings = await Trainings.find().populate('departmentId');
+    const trainings = await Trainings.find().populate('department', 'name vacancyType')
     res.status(200).json({ success: true, data: trainings });
   } catch (error) {
     res.status(500).json({ success: false, message: "Fetch failed", error: error.message });
@@ -48,7 +48,7 @@ export const getAllTrainings = async (req, res) => {
 // GET training by ID
 export const getTrainingById = async (req, res) => {
   try {
-    const training = await Trainings.findById(req.params.id).populate('departmentId');
+    const training = await Trainings.findById(req.params.id).populate('department', 'name vacancyType')
     if (!training) {
       return res.status(404).json({ success: false, message: "Training not found" });
     }
