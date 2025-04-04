@@ -9,15 +9,15 @@ export const createEvent = async (req, res) => {
       eventLocation,
       eventDescription,
       eventRequirements,
-      departmentId
+      department
     } = req.body;
 
     // Verify the department exists and get its name and vacancyType
 
     
-    const department = await Department.findById(departmentId);
+    const departmentId = await Department.findById(department);
     console.log('Department ID:', department);
-    if (!department) {
+    if (!departmentId) {
       return res.status(404).json({ success: false, message: "Department not found" });
     }
 
@@ -27,7 +27,7 @@ export const createEvent = async (req, res) => {
       eventLocation,
       eventDescription,
       eventRequirements,
-      departmentId: department._id
+      department: departmentId._id
     });
 
     await event.save();
@@ -39,7 +39,7 @@ export const createEvent = async (req, res) => {
 
 export const displayEvents = async (req, res) => {
   try {
-    const event = await events.find().populate('departmentId');
+    const event = await events.find().populate('department', 'name vacancyType');
     res.status(200).json({ success: true, data: event });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Fetch failed', error: error.message });
@@ -49,7 +49,7 @@ export const displayEvents = async (req, res) => {
 export const getEventsById = async (req, res) => {
   const { id } = req.params;
   try {
-    const event = await events.findById(id).populate('departmentId');
+    const event = await events.findById(id).populate('department', 'name vacancyType');
     if (!event) {
       return res.status(404).json({ success: false, message: "Event not found" });
     }
